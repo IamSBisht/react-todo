@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-let items = [];
+let taskList = [];
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -17,7 +17,8 @@ function App() {
       id: uuidv4(),
       task: inputValue,
     };
-    items = [...items, newItem];
+    taskList = [...taskList, newItem];
+    console.log(taskList);
     // setInputValue("");
   };
 
@@ -30,7 +31,7 @@ function App() {
             handeleChange={(e) => setInputValue(e.target.value)}
             handleSubmit={handleSubmit}
           />
-          <TodoList items={items} />
+          <TodoList items={taskList} />
         </div>
       </div>
     </div>
