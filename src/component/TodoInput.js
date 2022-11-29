@@ -13,7 +13,8 @@ const TodoInput = (props) => {
             type="text"
             className="form-control"
             placeholder="Add a todo item"
-            onChange={props.handleChange}
+            onChange={handleChange}
+            value={inputValue}
           />
         </div>
         <button type="submit" className="btn btn-block btn-primary w-100 mt-4">

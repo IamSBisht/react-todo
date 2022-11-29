@@ -2,7 +2,8 @@ import React from "react";
 import TodoItem from "./TodoItem";
 
 const TodoList = (props) => {
-  const { id, item } = props;
+  console.log(props);
+  const { id, items } = props;
   return (
     <ul className="list-group my-5">
       <h3 className="text-center">Todo List</h3>
