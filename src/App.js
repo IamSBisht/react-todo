@@ -17,17 +17,22 @@ function App() {
       task: inputValue,
     };
     setTaskList([...taskList, newItem]);
-    localStorage.setItem("tasklist", JSON.stringify([...taskList, newItem]))
+    localStorage.setItem("tasklist", JSON.stringify([...taskList, newItem]));
     setInputValue("");
   };
 
+  const clearList = () => {
+    setTaskList([]);
+    localStorage.setItem("tasklist", []);
+  };
+
   useEffect(() => {
-    let tasklist_ = localStorage.getItem("tasklist")
+    let tasklist_ = localStorage.getItem("tasklist");
     if (tasklist_) {
-      tasklist_ = JSON.parse(tasklist_ ?? "{}")
-      setTaskList(tasklist_)
+      tasklist_ = JSON.parse(tasklist_ ?? "{}");
+      setTaskList(tasklist_);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="container">
@@ -39,7 +44,7 @@ function App() {
             handleChange={(e) => setInputValue(e.target.value)}
             handleSubmit={handleSubmit}
           />
-          <TodoList items={taskList} />
+          <TodoList items={taskList} clearList={clearList} />
         </div>
       </div>
     </div>
