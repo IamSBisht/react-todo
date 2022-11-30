@@ -1,7 +1,10 @@
 import React from "react";
 
 const TodoInput = (props) => {
+
+  // Hooks and vars
   const { inputValue, handleChange, handleSubmit } = props;
+
   return (
     <div className="card card-body my-3">
       <form action="" onSubmit={handleSubmit}>
@@ -11,9 +14,9 @@ const TodoInput = (props) => {
           </div>
           <input
             type="text"
+            onChange={handleChange}
             className="form-control"
             placeholder="Add a todo item"
-            onChange={handleChange}
             value={inputValue}
           />
         </div>
