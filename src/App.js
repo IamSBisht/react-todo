@@ -26,6 +26,18 @@ function App() {
     localStorage.setItem("tasklist", []);
   };
 
+  const handleDelete = (id) => {
+    const filteredItem = taskList.filter((item) => item.id !== id);
+    setTaskList(filteredItem);
+    localStorage.setItem("tasklist", JSON.stringify(filteredItem));
+  };
+
+  const handleEdit = (id) => {
+    const filteredItem = taskList.filter((item) => item.id !== id);
+    const slectedItem = taskList.find((item) => item.id == id);
+    setInputValue(slectedItem.task);
+  };
+
   useEffect(() => {
     let tasklist_ = localStorage.getItem("tasklist");
     if (tasklist_) {
@@ -44,7 +56,12 @@ function App() {
             handleChange={(e) => setInputValue(e.target.value)}
             handleSubmit={handleSubmit}
           />
-          <TodoList items={taskList} clearList={clearList} />
+          <TodoList
+            items={taskList}
+            clearList={clearList}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
         </div>
       </div>
     </div>
