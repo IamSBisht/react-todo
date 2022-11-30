@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [taskList, setTaskList] = useState([]);
+  const [editing, setEditing] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +37,12 @@ function App() {
     const filteredItem = taskList.filter((item) => item.id !== id);
     const slectedItem = taskList.find((item) => item.id == id);
     setInputValue(slectedItem.task);
+    setTaskList(filteredItem);
+    setEditing(true);
+    const editItem = {
+      id: id,
+      task: inputValue,
+    };
   };
 
   useEffect(() => {
@@ -55,6 +62,8 @@ function App() {
             inputValue={inputValue}
             handleChange={(e) => setInputValue(e.target.value)}
             handleSubmit={handleSubmit}
+            handleEdit={handleEdit}
+            editing={editing}
           />
           <TodoList
             items={taskList}

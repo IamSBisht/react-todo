@@ -1,10 +1,8 @@
 import React from "react";
 
 const TodoInput = (props) => {
-
   // Hooks and vars
-  const { inputValue, handleChange, handleSubmit } = props;
-
+  const { inputValue, handleChange, handleSubmit, handleEdit, editing } = props;
   return (
     <div className="card card-body my-3">
       <form action="" onSubmit={handleSubmit}>
@@ -20,8 +18,13 @@ const TodoInput = (props) => {
             value={inputValue}
           />
         </div>
-        <button type="submit" className="btn btn-block btn-primary w-100 mt-4">
-          Add item
+        <button
+          type="submit"
+          className={`btn btn-block btn-${
+            editing ? "success" : "primary"
+          }  w-100 mt-4`}
+        >
+          {editing ? "Edit item" : "Add item"}
         </button>
       </form>
     </div>
