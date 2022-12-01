@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
+  // Todo list state
   const [inputValue, setInputValue] = useState("");
   const [taskList, setTaskList] = useState([]);
   const [editing, setEditing] = useState(false);
@@ -20,6 +21,7 @@ function App() {
     setTaskList([...taskList, newItem]);
     localStorage.setItem("tasklist", JSON.stringify([...taskList, newItem]));
     setInputValue("");
+    setEditing(false);
   };
 
   const clearList = () => {
@@ -53,6 +55,27 @@ function App() {
     }
   }, []);
 
+  // Dynamic Form state
+
+  const [inputFields, setInputFields] = useState([
+    { cardLabel: "", cardNumber: "" },
+  ]);
+
+  const handleFormChange = (index, e) => {
+    let data = [...inputFields];
+    data[index][e.target.name] = e.target.value;
+    setInputFields(data);
+  };
+
+  const addField = () => {
+    let newField = { cardLabel: "", cardNumber: "" };
+    setInputFields([...inputFields, newField]);
+  };
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(inputFields);
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -71,6 +94,44 @@ function App() {
             handleDelete={handleDelete}
             handleEdit={handleEdit}
           />
+        </div>
+        <div className="col-10 mx-auto col-md-8 mt-4">
+          <button className="w-100 btn btn-dark" onClick={addField}>
+            Add Card
+          </button>
+          <form action="" onSubmit={submit}>
+            <div className="dynamic-field-wrapper mt-4">
+              {inputFields.map((field, index) => {
+                return (
+                  <div className="row mb-3" key={index}>
+                    <div className="col-3">
+                      <input
+                        type="text"
+                        name="cardLabel"
+                        className="form-control"
+                        placeholder="Card label"
+                        value={field.cardLabel}
+                        onChange={(e) => handleFormChange(index, e)}
+                      />
+                    </div>
+                    <div className="col-9">
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        className="form-control"
+                        placeholder="Card label"
+                        value={field.cardNumber}
+                        onChange={(e) => handleFormChange(index, e)}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <button type="submit" className="w-100 btn btn-success">
+              Store Cards
+            </button>
+          </form>
         </div>
       </div>
     </div>
