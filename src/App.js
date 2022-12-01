@@ -75,6 +75,11 @@ function App() {
     e.preventDefault();
     console.log(inputFields);
   };
+  const removeFields = (index) => {
+    let data = [...inputFields];
+    data.splice(index, 1);
+    setInputFields(data);
+  };
 
   return (
     <div className="container">
@@ -114,7 +119,7 @@ function App() {
                         onChange={(e) => handleFormChange(index, e)}
                       />
                     </div>
-                    <div className="col-9">
+                    <div className="col-8">
                       <input
                         type="text"
                         name="cardNumber"
@@ -123,6 +128,14 @@ function App() {
                         value={field.cardNumber}
                         onChange={(e) => handleFormChange(index, e)}
                       />
+                    </div>
+                    <div className="col-1">
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeFields(index)}
+                      >
+                        X
+                      </button>
                     </div>
                   </div>
                 );
